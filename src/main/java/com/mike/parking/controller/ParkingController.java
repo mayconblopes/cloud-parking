@@ -7,6 +7,7 @@ import com.mike.parking.model.Parking;
 import com.mike.parking.service.ParkingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,5 +48,19 @@ public class ParkingController {
         var parking = parkingService.create(parkingCreate);
         var result = parkingMapper.toParkingDTO(parking);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ParkingDTO> update(@PathVariable String id, @RequestBody ParkingCreateDTO dto){
+        var parkingCreate = parkingMapper.toParkingCreate((dto));
+        var parking = parkingService.update(id, parkingCreate);
+        var result = parkingMapper.toParkingDTO(parking);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable String id){
+        parkingService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
