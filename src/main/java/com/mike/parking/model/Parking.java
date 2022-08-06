@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Entity
 @Data
 public class Parking {
+    @Id
     private String id;
     private String license;
     private String state;
@@ -16,7 +20,7 @@ public class Parking {
     private String color;
 
     private LocalDateTime entryDate;
-    private LocalDateTime exitDateentryDateentryDate;
+    private LocalDateTime exitDate;
     private Double bill;
 
     public Parking() {
@@ -29,4 +33,5 @@ public class Parking {
         this.model = model;
         this.color = color;
     }
+
 }
